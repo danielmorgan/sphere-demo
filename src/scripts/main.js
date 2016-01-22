@@ -1,27 +1,48 @@
+'use strict';
+
 var THREE = require('three');
 
 window.addEventListener('load', function() {
+    var width  = window.innerWidth;
+    var height = window.innerHeight;
+    var loader = new THREE.TextureLoader();
+
+    // Renderer settings
     var renderer = new THREE.WebGLRenderer({ antialiasing: true });
-    renderer.setSize(640, 480);
-    document.body.appendChild( renderer.domElement );
-
     var scene = new THREE.Scene();
+    renderer.setSize(width, height);
+    renderer.setClearColor(0x222222, 1);
 
-    var camera = new THREE.PerspectiveCamera( 35, 640/480, 0.1, 10000 );
-    camera.position.set( -15, 10, 15 );
-    camera.lookAt( scene.position );
-    
-    var geometry   = new THREE.SphereGeometry(5, 64, 64)
-    var material  = new THREE.MeshPhongMaterial()
-    var mesh = new THREE.Mesh( geometry, material );
-    scene.add( mesh );
+    // Camera settings
+    var camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 10000);
+    camera.position.z = 25;
+    camera.lookAt(scene.position);
 
-    var light = new THREE.PointLight( 0xFFFFFF );
-    light.position.set( -12.5, 10, 15 );
-    scene.add( light );
+    var globe;
 
-    renderer.setClearColor( 0xFFFFFF, 1);
+    // Build globe
+    loader.load('../images/world.topo.bathy.200412.3x5400x2700.jpg', function(texture) {
+        var material = new THREE.MeshPhongMaterial({ map: texture });
+        var geometry = new THREE.SphereGeometry(5, 32, 32);
+        globe = new THREE.Mesh(geometry, material);
+        scene.add(globe);
+    })
 
-    renderer.render( scene, camera );
+    // Add light
+    var ambientLight = new THREE.AmbientLight(0xFFFFFF)
+    var sun = new THREE.DirectionalLight(0xFFFFFF, 1.3);
+    sun.position.set(-10, 0, 5);
+    scene.add(ambientLight);
+    scene.add(sun);
 
+    // Draw
+    (function animate() {
+        requestAnimationFrame(animate);
+
+        globe.rotation.y += 0.01
+
+        sun.position.x = sun.position.x + 0.01;
+        renderer.render(scene, camera);
+        document.body.appendChild(renderer.domElement);
+    })();
 });
