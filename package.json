@@ -21,5 +21,8 @@
     "marked": "~0.3.0",
     "through2": "^0.6.5",
     "yargs": "^3.9.0"
+  },
+  "dependencies": {
+    "three": "^0.73.2"
   }
 }
