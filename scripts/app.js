@@ -16208,7 +16208,7 @@ THREE.Box2.prototype = {
 		};
 
 	}(),
-	
+
 	clone: function () {
 
 		return new this.constructor().copy( this );
@@ -26232,20 +26232,20 @@ THREE.OrthographicCamera.prototype.updateProjectionMatrix = function () {
 };
 
 THREE.OrthographicCamera.prototype.copy = function ( source ) {
-	
+
 	THREE.Camera.prototype.copy.call( this, source );
-	
+
 	this.left = source.left;
 	this.right = source.right;
 	this.top = source.top;
 	this.bottom = source.bottom;
 	this.near = source.near;
 	this.far = source.far;
-	
+
 	this.zoom = source.zoom;
-	
+
 	return this;
-		
+
 };
 
 THREE.OrthographicCamera.prototype.toJSON = function ( meta ) {
@@ -26391,18 +26391,18 @@ THREE.PerspectiveCamera.prototype.updateProjectionMatrix = function () {
 };
 
 THREE.PerspectiveCamera.prototype.copy = function ( source ) {
-	
+
 	THREE.Camera.prototype.copy.call( this, source );
-	
+
 	this.fov = source.fov;
 	this.aspect = source.aspect;
 	this.near = source.near;
 	this.far = source.far;
-	
+
 	this.zoom = source.zoom;
-	
+
 	return this;
-		
+
 };
 
 THREE.PerspectiveCamera.prototype.toJSON = function ( meta ) {
@@ -29515,7 +29515,7 @@ THREE.LineDashedMaterial.prototype.copy = function ( source ) {
 	THREE.Material.prototype.copy.call( this, source );
 
 	this.color.copy( source.color );
-	
+
 	this.linewidth = source.linewidth;
 
 	this.scale = source.scale;
@@ -29614,7 +29614,7 @@ THREE.MeshBasicMaterial.prototype = Object.create( THREE.Material.prototype );
 THREE.MeshBasicMaterial.prototype.constructor = THREE.MeshBasicMaterial;
 
 THREE.MeshBasicMaterial.prototype.copy = function ( source ) {
-	
+
 	THREE.Material.prototype.copy.call( this, source );
 
 	this.color.copy( source.color );
@@ -29646,7 +29646,7 @@ THREE.MeshBasicMaterial.prototype.copy = function ( source ) {
 
 	this.skinning = source.skinning;
 	this.morphTargets = source.morphTargets;
-	
+
 	return this;
 
 };
@@ -30726,9 +30726,9 @@ THREE.CubeTexture.prototype.constructor = THREE.CubeTexture;
 THREE.CubeTexture.prototype.copy = function ( source ) {
 
 	THREE.Texture.prototype.copy.call( this, source );
-	
+
 	this.images = source.images;
-	
+
 	return this;
 
 };
@@ -30774,7 +30774,7 @@ THREE.DataTexture = function ( data, width, height, format, type, mapping, wrapS
 
 	this.magFilter = magFilter !== undefined ? magFilter : THREE.NearestFilter;
 	this.minFilter = minFilter !== undefined ? minFilter : THREE.NearestFilter;
-	
+
 	this.flipY = false;
 	this.generateMipmaps  = false;
 
@@ -31541,11 +31541,11 @@ THREE.Bone.prototype = Object.create( THREE.Object3D.prototype );
 THREE.Bone.prototype.constructor = THREE.Bone;
 
 THREE.Bone.prototype.copy = function ( source ) {
-	
+
 	THREE.Object3D.prototype.copy.call( this, source );
-	
+
 	this.skin = source.skin;
-	
+
 	return this;
 
 };
@@ -31582,7 +31582,7 @@ THREE.Skeleton = function ( bones, boneInverses, useVertexTexture ) {
 		//       32x32 pixel texture max  256 bones * 4 pixels = (32 * 32)
 		//       64x64 pixel texture max 1024 bones * 4 pixels = (64 * 64)
 
-		
+
 		var size = Math.sqrt( this.bones.length * 4 ); // 4 pixels needed for 1 matrix
 		size = THREE.Math.nextPowerOfTwo( Math.ceil( size ) );
 		size = Math.max( size, 4 );
@@ -31808,7 +31808,7 @@ THREE.SkinnedMesh.prototype.bind = function( skeleton, bindMatrix ) {
 	if ( bindMatrix === undefined ) {
 
 		this.updateMatrixWorld( true );
-		
+
 		this.skeleton.calculateInverses();
 
 		bindMatrix = this.matrixWorld;
@@ -43411,7 +43411,7 @@ THREE.CubicBezierCurve.prototype.getPoint = function ( t ) {
 
 	var b3 = THREE.ShapeUtils.b3;
 
-	return new THREE.Vector2( 
+	return new THREE.Vector2(
 		b3( t, this.v0.x, this.v1.x, this.v2.x, this.v3.x ),
 		b3( t, this.v0.y, this.v1.y, this.v2.y, this.v3.y )
 	);
@@ -43422,7 +43422,7 @@ THREE.CubicBezierCurve.prototype.getTangent = function( t ) {
 
 	var tangentCubicBezier = THREE.CurveUtils.tangentCubicBezier;
 
-	return new THREE.Vector2( 
+	return new THREE.Vector2(
 		tangentCubicBezier( t, this.v0.x, this.v1.x, this.v2.x, this.v3.x ),
 		tangentCubicBezier( t, this.v0.y, this.v1.y, this.v2.y, this.v3.y )
 	).normalize();
@@ -43484,7 +43484,7 @@ THREE.EllipseCurve = function ( aX, aY, xRadius, yRadius, aStartAngle, aEndAngle
 	this.aEndAngle = aEndAngle;
 
 	this.aClockwise = aClockwise;
-	
+
 	this.aRotation = aRotation || 0;
 
 };
@@ -43510,7 +43510,7 @@ THREE.EllipseCurve.prototype.getPoint = function ( t ) {
 		angle = this.aStartAngle + t * deltaAngle;
 
 	}
-	
+
 	var x = this.aX + this.xRadius * Math.cos( angle );
 	var y = this.aY + this.yRadius * Math.sin( angle );
 
@@ -43593,7 +43593,7 @@ THREE.QuadraticBezierCurve3 = THREE.Curve.create(
 
 	function ( t ) {
 
-		var b2 = THREE.ShapeUtils.b2;		
+		var b2 = THREE.ShapeUtils.b2;
 
 		return new THREE.Vector3(
 			b2( t, this.v0.x, this.v1.x, this.v2.x ),
@@ -45307,7 +45307,7 @@ THREE.ShapeGeometry.prototype.addShape = function ( shape, options ) {
  * @author bhouston / http://clara.io
  */
 
-// points - to create a closed torus, one must use a set of points 
+// points - to create a closed torus, one must use a set of points
 //    like so: [ a, b, c, d, a ], see first is the same as last.
 // segments - the number of circumference segments to create
 // phiStart - the starting radian
@@ -47186,7 +47186,7 @@ THREE.ArrowHelper = ( function () {
 		if ( headWidth === undefined ) headWidth = 0.2 * headLength;
 
 		this.position.copy( origin );
-		
+
 		if ( headLength < length ) {
 			this.line = new THREE.Line( lineGeometry, new THREE.LineBasicMaterial( { color: color } ) );
 			this.line.matrixAutoUpdate = false;
@@ -48722,10 +48722,10 @@ var TouchManager = new Hammer.Manager(window);
 
 var geometry = new THREE.SphereGeometry(10, 64, 64);
 var material = new THREE.MeshPhongMaterial({
-    map: TextureLoader.load('../images/world.png', function (t) {
+    map: TextureLoader.load('images/world.png', function (t) {
         return t;
     }),
-    specularMap: TextureLoader.load('../images/bathymetry.jpg', function (t) {
+    specularMap: TextureLoader.load('images/bathymetry.jpg', function (t) {
         return t;
     }),
     specular: new THREE.Color(0xBBDDFF)
